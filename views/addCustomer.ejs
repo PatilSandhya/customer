@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<head>
+    <!-- BEGIN GLOBAL MANDATORY STYLES/SCRIPTS -->
+    <%- include('./head.ejs') %>
+    <!-- END GLOBAL MANDATORY STYLES/SCRIPTS -->
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+    <!-- END PAGE LEVEL STYLES -->
+</head>
+<!-- END GLOBAL MANDATORY STYLES -->
+
+<!--  BEGIN NAVBAR  -->
+
+
+<%- include('./header.ejs') %>
+<!--  END NAVBAR  --> 
+
+<!--  BEGIN NAVBAR  -->
+<div class="sub-header-container">
+    <header class="header navbar navbar-expand-sm">
+        <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+
+        <ul class="navbar-nav flex-row">
+            <li>
+                <div class="page-header">
+
+                    <nav class="breadcrumb-one" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Customer</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><span>Add</span></li>
+                        </ol>
+                    </nav>
+
+                </div>
+            </li>
+        </ul>
+    </header>
+</div>
+<!--  END NAVBAR  --> 
+ 
+
+<!--  BEGIN MAIN CONTAINER  -->
+<div class="main-container" id="container">
+  <div class="overlay"></div>
+  <div class="search-overlay"></div>
+  <!--  BEGIN SIDEBAR  -->
+  <%- include('./sidebar.ejs') %>
+<!--  END SIDEBAR  -->  
+  
+  <!--  BEGIN CONTENT AREA  -->
+  <div id="content" class="main-content">
+    <div class="layout-px-spacing">
+      <div class="row layout-top-spacing">
+        <div class="col-lg-12 col-12 layout-spacing">
+          <div class="statbox widget box box-shadow">
+            <div class="widget-header">
+              <div class="row">
+                <div class="col-xl-6 col-md-6 col-sm-6 col-6">
+                  <h4>Customer Add</h4>
+                                 </div>
+              </div>
+            </div>
+            <div class="widget-content widget-content-area">
+              <form method="post" onSubmit="addCustomer(event)" enctype="multipart/form-data" id="formid">
+                  <div class="col-sm-12">
+                    <label for="name">Plesae Select Customer Type </label>
+                    <div class="form-group required">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customer_type27" name="customer_type" onClick="setcustomer_type(27)" class="custom-control-input" value="Transporter" checked>
+                        <label class="custom-control-label" for="customer_type27">Transporter</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customer_type28" name="customer_type" onClick="setcustomer_type(28)" value="Business" class="custom-control-input">
+                        <label class="custom-control-label" for="customer_type28">Business</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customer_type29" name="customer_type" onClick="setcustomer_type(29)" value="Individual" class="custom-control-input">
+                        <label class="custom-control-label" for="customer_type29">Individual</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12" id="customer_gst_exempted_typeidorshow" style="display:none">
+                    <label for="name">Is exempted from GST ? </label>
+                    <div class="form-group required">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customer_gst_exempted_type1" name="customer_gst_exempted_type" onClick="setcustomer_GST_exempted(this.value)" class="custom-control-input" value="1" >
+                        <label class="custom-control-label" for="customer_gst_exempted_type1">Yes</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customer_gst_exempted_type0" name="customer_gst_exempted_type"  onClick="setcustomer_GST_exempted(this.value)" value="0" class="custom-control-input" checked>
+                        <label class="custom-control-label" for="customer_gst_exempted_type0">No</label>
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="col-sm-6" id="gstno_name_rowid">
+                    <div class="form-group required">
+                      <label id="gstnolabelid">GST Number/Transporter Id (required)</label>
+                      <div class="input-group mb-2">
+                        <input type="text" name="GST_number" class="form-control " id="GST_number" placeholder="Enter a Valid GST Number" value="" maxlength="15" minlength="15" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122 || event.keyCode === 8;" required>
+                        <!-- <div class="input-group-append">
+                          <button class="btn btn-primary admin-button-add-vnew" type="button" id="ty56hbT7Fr2s">Submit</button>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group required">
+                      <label id="pannolabelid">PAN Number </label>
+                      <div class="input-group mb-2">
+                        <input type="text" name="pan_no" class="form-control showcls24mec" id="pan_no" placeholder="Enter PAN Number" value=""  maxlength="10" minlength="10"  onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122 || event.keyCode === 8;">
+                        <div class="input-group-append"> 
+                          <!--button class="btn btn-primary" type="button" id="tg56dfg53gs4d">Submit</button--> 
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group required"> </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group required">
+                      <label id="fullnamelabelid">Full Name</label>
+                      <input type="text" name="fullname" class="form-control showcls24mec" id="fullname" placeholder="Enter Full Name" value="" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-4" id="business_name_rowid">
+                    <div class="form-group required">
+                      <label id="">Business Name *</label>
+                      <input type="text" name="business_name" class="form-control showcls24mec" id="business_name" placeholder="Enter Business Name" value="" required>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-6" id="business_type_rowid">
+                    <div class="form-group required">
+                      <label for="name">Business Type *</label>
+                      <input type="text" name="business_type" class="form-control showcls24mec" id="business_type" placeholder="i.e. Retail Business" value="" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-6" id="ownership_rowid">
+                    <div class="form-group required">
+                      <label for="name">OwnerShip * </label>
+                      <input type="text" name="ownership" class="form-control showcls24mec" id="ownership" placeholder="i.e. Proprietorship" value="" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group required">
+                      <label for="name">Email </label>
+                      <input type="email" name="email" class="form-control showcls24mec" id="email" placeholder="Enter Email Address" value="">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group required">
+                      <label for="name">Mobile Number </label>
+                      <input type="text" name="mobile" class="form-control showcls24mec" id="mobile" placeholder="Enter Mobile Number" value="" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.keyCode === 8;" maxlength="10" minlength="10">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group required">
+                      <label for="password">Password *</label>
+                      <!-- <span id="e2xf5c4rf7hyn" class="badge badge-primary admid-select-color float-right"> Generate Random Password </span> -->
+                      <input type="text" name="password" class="form-control showcls24mec" id="password" placeholder="Enter Password" value="" required>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group required">
+                    <label>Customer Status *</label>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="status0" name="status" class="custom-control-input" value="0" checked>
+                        <label class="custom-control-label" for="status0" >Active</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="status1" name="status"  value="1" class="custom-control-input">
+                        <label class="custom-control-label" for="status1">Deactive</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div class="form-group required">
+                    <label>Customer Payment Bill Type *</label>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="user_paymentbill_type0" name="user_paymentbill_type" class="custom-control-input" value="0" checked>
+                        <label class="custom-control-label" for="user_paymentbill_type0" >To Pay</label>
+                      </div>
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="user_paymentbill_type1" name="user_paymentbill_type"  value="1" class="custom-control-input">
+                        <label class="custom-control-label" for="user_paymentbill_type1">To Be Billed</label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+                <hr>
+                <h6> Customer Address <span id="dxtb45dcS5g7b" class="badge badge-success admid-select-color" onclick="addExtraAddress(event)"> Add Another Address</span></h6>
+                <br>
+                <div id="customer-div-address-id">
+                  <div class="row" id="addressiddefaultdiv0">
+                  <div class="col-sm-2">
+                      <div class="form-group required">
+                        <label for="pincode">Pincode </label>
+                        <input type="text" name="pincode" class="form-control showcls24mec fetchdatabypincodecls" data-id="1"  id="pincode0" placeholder="Pincode" value="" maxlength="6" minlength="6" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.keyCode === 8;">
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-2">
+                      <div class="form-group required">
+                        <label for="name">Country *</label>
+                        <input type="text" name="country" class="form-control showcls24mec" id="country0"  placeholder="Country" value="India" required>
+                      </div>
+                    </div>
+                    <input type="hidden" name="addresslist[]" value="1" >
+                    <div class="col-sm-3">
+                      <div class="form-group required">
+                        <label for="name">State *</label>
+                        <input type="text" name="state" class="form-control showcls24mec" id="state0" placeholder="State" value="" required>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group required">
+                        <label for="name">City *</label>
+                        <input type="text" name="city" class="form-control showcls24mec" id="city0" placeholder="City" value="" required>
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-2">
+                      <div class="form-group required">
+                        <label for="name">Address Type *</label>
+                        <select class="form-control showcls24mec"  name="address_type" id="address_type0" required="">
+                            <option value="H"> Home</option>
+                              <option value="W"> Work</option>
+                              <option value="O"> Other</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group  required">
+                        <label for="description">Address *</label>
+                        <textarea name="address" class="form-control showcls24mec" rows="2" id="address0" placeholder="Enter Address" required></textarea>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group required">
+                        <label for="name">Landmark </label>
+                        <input type="text" name="landmark" class="form-control showcls24mec" id="landmark0" placeholder="Landmark" value=""  maxlength="200">
+                      </div>
+                    </div>
+                                 
+                    <div class="col-sm-12">
+                      <div class="form-group required">
+                        <!-- <div class="custom-control custom-checkbox">
+                          <input type="hidden" name="is_default_check[]" value="1" class="is_defaultcheckcls" id="is_defaultcheckclsid1">
+                          <input type="checkbox" class="custom-control-input isdefaultcls" name="is_default" id="customCheck150" value="1" checked>
+                          <label class="custom-control-label" for="customCheck1" onclick="check_onlyone(150)">Check This to Make Default Address</label>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <hr style="width:100%">
+                <button type="reset" class="btn btn-dark">Cancel</button>
+                <button type="submit" class="btn btn-info float-right">Save</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <div class="footer-wrapper">
+      <div class="footer-section f-section-1">
+        <p class=""><a>Developed By TechNomads  <i class="mb-1 text-primary ml-1 icon-small" data-feather="heart"></i> </a></p>
+      </div>
+      <div class="footer-section f-section-2">
+        <p class="">Admin</p>
+      </div>
+    </div> </div>
+  <!--  END CONTENT AREA  --> 
+</div>
+<!-- END MAIN CONTAINER --> 
+
+<!-- BEGIN GLOBAL MANDATORY SCRIPTS --> 
+<script type="text/javascript">
+    window.processingHTML_Datatable = '<div class="spinner-border spinner-border-reverse align-self-center loader-lg text-secondary"></div>';
+</script>
+
+<script src="http://bigdaddy.hostappshere.co.in/public/admin_assets/assets/js/libs/jquery-3.1.1.min.js"></script> 
+<script src="http://bigdaddy.hostappshere.co.in/public/admin_assets/bootstrap/js/popper.min.js"></script> 
+<script src="http://bigdaddy.hostappshere.co.in/public/admin_assets/bootstrap/js/bootstrap.min.js"></script> 
+<script src="http://bigdaddy.hostappshere.co.in/public/admin_assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script> 
+<script src="http://bigdaddy.hostappshere.co.in/public/admin_assets/assets/js/app.js"></script> 
+<script src="http://bigdaddy.hostappshere.co.in/public/admin_assets/plugins/sweetalerts/sweetalert2.min.js"></script> 
+<script src="http://bigdaddy.hostappshere.co.in/public/admin_assets/plugins/sweetalerts/custom-sweetalert.js"></script>
+<script src="http://bigdaddy.hostappshere.co.in/public/admin_assets/assets/js/custom.js"></script> 
+<script src="http://bigdaddy.hostappshere.co.in/public/admin_assets/plugins/fullcalendar/moment.min.js"></script> 
+<!----our custom own-------->
+<script src="http://bigdaddy.hostappshere.co.in/public/js/mycustomall.js"></script>  
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <!----our custom own-------->  
+<script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script> 
+
+<!-- END GLOBAL MANDATORY SCRIPTS --> 
+
+<!----Add here global Js ----start----->
+<script type="text/javascript" >
+const toast = swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 3000,
+					padding: '2em'
+  			});
+			
+
+function showSweetAlert(text1='Completed',text2='Successfully Done', alerttype='1'){
+		if(0==alerttype){  alerttype ="error";  } else if(1==alerttype) { alerttype ="success";  } else { alerttype ="question";  }
+		swal(text1,text2,alerttype);
+}
+
+function showToastAlert(text1='Error', alerttype='error'){
+		toast({
+				type: alerttype,
+				title: text1,
+				padding: '2em',
+	});
+}
+function showLoader(type=1){
+	
+}
+
+function showAlertInToast(res){
+		if(res.success==1){
+			showToastAlert(res.msg, alerttype='success');
+		}
+		else
+		{
+			showToastAlert(res.msg, alerttype='error');
+		}
+}
+
+function showAlert(res){
+		if(res.success==1){
+			showSweetAlert("Completed",res.msg, res.success); 
+		}
+		else
+		{
+			showSweetAlert("Wrong",res.msg, res.success); 
+		}
+}
+
+</script>
+<script>
+    let count = 1;
+    const addExtraAddress = () => {
+      const idval = `${count++}`;
+      ehtml = `<div id="extraAddress${idval}"><hr>
+                <h6> Customer Address <span id="dxtb45dcS5g7b" class="badge badge-danger float-right"  onclick="removethisid('extraAddress${idval}')"> Delete This Address</span></h6>
+                <br>
+                <div id="customer-div-address-id${idval}">
+                  <div class="row" id="addressiddefaultdiv${idval}">
+                  <div class="col-sm-2">
+                      <div class="form-group required">
+                        <label for="pincode${idval}">Pincode </label>
+                        <input type="text" name="pincode" class="form-control showcls24mec fetchdatabypincodecls" data-id="1"  id="pincode${idval}" placeholder="Pincode" value="" maxlength="6" minlength="6" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.keyCode === 8;">
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-2">
+                      <div class="form-group required">
+                        <label for="name">Country *</label>
+                        <input type="text" name="country" class="form-control showcls24mec" id="country${idval}"  placeholder="Country" value="India" required>
+                      </div>
+                    </div>
+                    <input type="hidden" name="addresslist[]" value="1" >
+                    <div class="col-sm-3">
+                      <div class="form-group required">
+                        <label for="name">State *</label>
+                        <input type="text" name="state" class="form-control showcls24mec" id="state${idval}" placeholder="State" value="" required>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group required">
+                        <label for="name">City *</label>
+                        <input type="text" name="city" class="form-control showcls24mec" id="city${idval}" placeholder="City" value="" required>
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-2">
+                      <div class="form-group required">
+                        <label for="name">Address Type *</label>
+                        <select class="form-control showcls24mec"  name="address_type" id="address_type${idval}" required="">
+                                                <option value="H"> Home</option>
+                                                 <option value="W"> Work</option>
+                                                 <option value="O"> Other</option>
+                       
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group  required">
+                        <label for="description">Address *</label>
+                        <textarea name="address" class="form-control showcls24mec" rows="2" id="address${idval}" placeholder="Enter Address" required></textarea>
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group required">
+                        <label for="name">Landmark </label>
+                        <input type="text" name="landmark" class="form-control showcls24mec" id="landmark${idval}" placeholder="Landmark" value=""  maxlength="200">
+                      </div>
+                    </div>                 
+                    
+                    <div class="col-sm-12">
+                      
+                      </div>
+                    </div>
+                  </div>
+                </div>`
+                $('#customer-div-address-id').append(ehtml);
+    }
+
+    /* const check_onlyone = (id) => {
+      $('.isdefaultcls').prop( "checked", false );
+      $('.is_defaultcheckcls').value(0);
+      $("#is_defaultcheckclsid"+id).value(1);
+    } */
+
+    const removethisid = (id) => {
+        x = confirm("do you want to delete this row, are you sure ?");
+        if (x == true) {
+            $("#" + id).remove();      
+        }
+    }
+
+    const addCustomer = (e) => {
+      e.preventDefault();
+            const customerType = e.target.elements.customer_type.value;
+            const name = $('#fullname').val();
+            const gstNum = $('#GST_number').val();
+            const panNum = $('#pan_no').val();
+            const businessName = $('#business_name').val();
+            const businessType = $('#business_type').val();
+            const ownership = $('#ownership').val();
+            const email= $('#email').val();
+            const mobileNum = $('#mobile').val();
+            const password = $('#password').val();
+            const customerStatus = e.target.elements.status.value;
+            const paymentbill = e.target.elements.user_paymentbill_type.value;
+            
+            const customerDataObj = {
+              customerType, name, gstNum, panNum, businessName, businessType, ownership, email, mobileNum, password, customerStatus, paymentbill
+            }
+            alert(customerDataObj);
+            if(count > 0) {
+                const addressesArr = [];
+                for(let i = 0; i < count; i++) {  
+                  const pincode = $(`#pincode${i}`).val(); 
+                  const country= $(`#country${i}`).val(); 
+                  const state = $(`#state${i}`).val();
+                  const city = $(`#city${i}`).val(); 
+                  const addressType = $(`#address_type${i}`).val(); 
+                  const address = $(`#address${i}`).val();
+                  const landmark = $(`#landmark${i}`).val();    
+                  addressesArr.push({ pincode, country, state, city, addressType, address, landmark });
+                    //if(obj.pincode || obj.country || obj.state || obj.city || obj.addressType || obj.address || obj.landmark) addressesArr.push(obj);
+                    console.log("in count" + count);           
+                }
+                if(addressesArr.length > 0) customerDataObj['otherAddress'] = addressesArr;
+            }
+
+            $.ajax({
+                url: `/customer/add`,
+                type: "POST",
+                headers: { "Authorization": 'Bearer ' + localStorage.getItem('token') },
+                data: JSON.stringify(customerDataObj),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    // console.log('data > ', data);
+                    showSuccessPopup(data.msg);
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';                        
+                    }, 500); 
+                },
+                error: function (error) {
+                    console.log('Error', error, error.responseJSON);
+                    if (error.responseJSON && error.responseJSON.message || error.responseJSON.msg) {
+                        let errorMsg = error.responseJSON.message || error.responseJSON.msg;
+                        showErrorPopup(errorMsg);
+                    }
+                }
+            });
+    }
+</script>

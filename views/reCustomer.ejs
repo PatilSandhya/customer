@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--  BEGIN HEAD  -->
+<head>
+    <!-- BEGIN GLOBAL MANDATORY STYLES/SCRIPTS -->
+    <%- include('./head.ejs') %>
+    <!-- END GLOBAL MANDATORY STYLES/SCRIPTS -->
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+    <!-- END PAGE LEVEL STYLES -->
+</head>
+<!--  END HEAD  -->
+
+<body>
+    
+    <!--  BEGIN NAVBAR  -->
+    <%- include('./header.ejs') %>
+    <!--  END NAVBAR  -->
+
+    <!--  BEGIN NAVBAR  -->
+    <div class="sub-header-container">
+        <header class="header navbar navbar-expand-sm">
+            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
+
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Customer</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Add</span></li>
+                            </ol>
+                        </nav>
+
+                    </div>
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <%- include('./sidebar.ejs') %>
+        <!--  END SIDEBAR  -->
+
+        <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content">
+            <div class="layout-px-spacing">
+
+                <div class="row layout-top-spacing">
+                
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                        <div class="widget-content widget-content-area br-6">
+                            <h5 class="">Add Customer</h5>
+                            <br/>
+
+                            <form onSubmit="addCustomer(event)">
+                                <div class="col-sm-12">
+                                    <label for="name">Plesae Select Customer Type </label>
+                                    <div class="form-group required">
+                                      <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customer_type27" name="customer_type" onClick="setcustomer_type(27)" class="custom-control-input" value="Transporter" checked>
+                                        <label class="custom-control-label" for="customer_type27">Transporter</label>
+                                      </div>
+                                      <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customer_type28" name="customer_type" onClick="setcustomer_type(28)" value="Business" class="custom-control-input">
+                                        <label class="custom-control-label" for="customer_type28">Business</label>
+                                      </div>
+                                      <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customer_type29" name="customer_type" onClick="setcustomer_type(29)" value="Individual" class="custom-control-input">
+                                        <label class="custom-control-label" for="customer_type29">Individual</label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-12" id="customer_gst_exempted_typeidorshow" style="display:none">
+                                    <label for="name">Is exempted from GST ? </label>
+                                    <div class="form-group required">
+                                      <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customer_gst_exempted_type1" name="customer_gst_exempted_type" onClick="setcustomer_GST_exempted(this.value)" class="custom-control-input" value="1" >
+                                        <label class="custom-control-label" for="customer_gst_exempted_type1">Yes</label>
+                                      </div>
+                                      <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="customer_gst_exempted_type0" name="customer_gst_exempted_type"  onClick="setcustomer_GST_exempted(this.value)" value="0" class="custom-control-input" checked>
+                                        <label class="custom-control-label" for="customer_gst_exempted_type0">No</label>
+                                      </div>
+                                    </div>
+                                  </div> 
+                                  <div class="col-sm-6" id="gstno_name_rowid">
+                                    <div class="form-group required">
+                                      <label id="gstnolabelid">GST Number/Transporter Id (required)</label>
+                                      <div class="input-group mb-2">
+                                        <input type="text" name="GST_number" class="form-control " id="GST_number" placeholder="Enter a Valid GST Number" value="" maxlength="15" minlength="15" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122 || event.keyCode === 8;" required>
+                                        <div class="input-group-append">
+                                          <button class="btn btn-primary admin-button-add-vnew" type="button" id="ty56hbT7Fr2s">Submit</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group required">
+                                      <label id="pannolabelid">PAN Number </label>
+                                      <div class="input-group mb-2">
+                                        <input type="text" name="pan_no" class="form-control showcls24mec" id="pan_no" placeholder="Enter PAN Number" value=""  maxlength="10" minlength="10"  onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122 || event.keyCode === 8;" disabled>
+                                        <div class="input-group-append"> 
+                                          <!--button class="btn btn-primary" type="button" id="tg56dfg53gs4d">Submit</button--> 
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group required"> </div>
+                                  </div>
+                               
+                                  <div class="col-sm-4">
+                                    <div class="form-group required">
+                                      <label id="fullnamelabelid">Full Name</label>
+                                      <input type="text" name="fullname" class="form-control showcls24mec" id="fullname" placeholder="Enter Full Name" value="" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4" id="business_name_rowid">
+                                    <div class="form-group required">
+                                      <label id="">Business Name *</label>
+                                      <input type="text" name="business_name" class="form-control showcls24mec" id="business_name" placeholder="Enter Business Name" value="" required>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="col-sm-6" id="business_type_rowid">
+                                    <div class="form-group required">
+                                      <label for="name">Business Type *</label>
+                                      <input type="text" name="business_type" class="form-control showcls24mec" id="business_type" placeholder="i.e. Retail Business" value="" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6" id="ownership_rowid">
+                                    <div class="form-group required">
+                                      <label for="name">OwnerShip * </label>
+                                      <input type="text" name="ownership" class="form-control showcls24mec" id="ownership" placeholder="i.e. Proprietorship" value="" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group required">
+                                      <label for="name">Email (optional)</label>
+                                      <input type="email" name="email" class="form-control showcls24mec" id="email" placeholder="Enter Email Address" value="">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group required">
+                                      <label for="name">Mobile Number (optional)</label>
+                                      <input type="text" name="mobile" class="form-control showcls24mec" id="mobile" placeholder="Enter Mobile Number" value="" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.keyCode === 8;" maxlength="10" minlength="10">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group required">
+                                      <label for="password">Password *</label>
+                                      <span id="e2xf5c4rf7hyn" class="badge badge-primary admid-select-color float-right"> Generate Random Password </span>
+                                      <input type="text" name="password" class="form-control showcls24mec" id="password" placeholder="Enter Password" value="" required>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-12">
+                                    <div class="form-group required">
+                                    <label>Customer Status *</label>
+                                      <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="status0" name="status" class="custom-control-input" value="0" checked>
+                                        <label class="custom-control-label" for="status0" >Active</label>
+                                      </div>
+                                      <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="status1" name="status"  value="1" class="custom-control-input">
+                                        <label class="custom-control-label" for="status1">Deactive</label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-12">
+                                    <div class="form-group required">
+                                    <label>Customer Payment Bill Type *</label>
+                                      <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="user_paymentbill_type0" name="user_paymentbill_type" class="custom-control-input" value="0" checked>
+                                        <label class="custom-control-label" for="user_paymentbill_type0" >To Pay</label>
+                                      </div>
+                                      <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="user_paymentbill_type1" name="user_paymentbill_type"  value="1" class="custom-control-input">
+                                        <label class="custom-control-label" for="user_paymentbill_type1">To Be Billed</label>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                <div class="form-group">
+                                    <div class="form-check pl-0">
+                                        <div class="custom-control custom-checkbox checkbox-info">
+                                            <input type="checkbox" class="custom-control-input" id="gridCheck" checked disabled>
+                                            <label class="custom-control-label" for="gridCheck">This is a default address</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="reset" class="btn btn-danger mt-3">Cancel</button>
+                                <button type="submit" class="btn btn-success mt-3 view-btn">Add</button>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <%- include('./footer.ejs') %>
+
+        </div>
+        <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="/plugins/table/datatable/datatables.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIRHIQxj6FX2sRhhKyItqeW_5DDbYR6B8&callback=initMap&libraries=&v=weekly" defer></script> 
+    <script src="/plugins/flatpickr/flatpickr.js"></script>
+    <script>
+        let shiftCount = 1, planCount = 1;
+        $(document).ready(() => {
+            showSidebarCurrentTab('customer', 2);
+            setStartEndTimeDropdown(`inputShiftStartTime0`, `inputShiftEndTime0`);
+            updatePaymentInputFields();
+        });
+
+        const setStartEndTimeDropdown = (startId, endId) => {
+            shiftStartTimeVar = flatpickr($(`#${startId}`), {
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "H:i",
+                defaultDate: "08:00",
+            });
+
+            shiftEndTimeVar = flatpickr($(`#${endId}`), {
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "H:i",
+                defaultDate: "20:00",
+            });
+        }
+
+        const updatePaymentInputFields = () => {
+            const selectedPaymentType = $(`#inputPaymentType`).find(":selected").val();
+            // console.log(selectedPaymentType);
+            $('.days-div').show(); $('.days-div input').attr('required', true);
+            $('.driver-price-div').hide(); $('.driver-price-div input').removeAttr('required');
+            if(selectedPaymentType == '2') {
+                $('.days-div').hide(); $('.days-div input').removeAttr('required');
+                $('.driver-price-div').show(); $('.driver-price-div input').attr('required', true);
+            }
+        }
+
+        /* <div class="form-group row" id="plan${idval}">
+            <div class="form-group col-md-4 required">
+                <label for="inputPlanName${idval}">Plan *</label>
+                <span onclick="removeById('plan${idval}')" class="badge badge-danger float-right" id="delethisidspan"> Delete This</span>
+                <input type="text" class="form-control" id="inputPlanName${idval}" placeholder="Enter Plan" required>
+            </div>
+            <div class="form-group col-md-4 required">
+                <label for="inputPriceCustomer${idval}">Customer Price *</label>
+                <input type="number" class="form-control allowdecimal" id="inputPriceCustomer${idval}" placeholder="Enter Customer Price" maxlength="10"  required>
+            </div>
+            <div class="form-group col-md-4 days-div required">
+                <label for="inputDays${idval}">Days *</label>
+                <input type="number" class="form-control" id="inputDays${idval}" placeholder="Enter Price" max="30" min=0 onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.keyCode === 8;" required>
+            </div>
+            <div class="form-group col-md-4 driver-price-div required">
+                <label for="inputPriceDriver${idval}">Driver Price *</label>
+                <input type="number" class="form-control allowdecimal" id="inputPriceDriver${idval}" placeholder="Enter Driver Price" maxlength="10" required>
+            </div>
+        </div> */
+
+        const addExtraPlanInForm = () => {
+            const idval = `${planCount++}`;
+            ehtml = `<div class="form-group row" id="plan${idval}">
+                        <div class="form-group col-md-4 required">
+                            <label for="inputPlanName${idval}">Plan *</label>
+                            <span onclick="removeById('plan${idval}')" class="badge badge-danger float-right" id="delethisidspan"> Delete This</span>
+                            <input type="text" class="form-control" id="inputPlanName${idval}" placeholder="Enter Plan" required>
+                        </div>
+                        <div class="form-group col-md-4 required">
+                            <label for="inputPriceCustomer${idval}">Customer Price *</label>
+                            <input type="number" class="form-control allowdecimal" id="inputPriceCustomer${idval}" placeholder="Enter Customer Price" maxlength="10"  required>
+                        </div>
+                        <div class="form-group col-md-4 days-div required">
+                            <label for="inputDays${idval}">Days *</label>
+                            <input type="number" class="form-control" id="inputDays${idval}" placeholder="Enter Price" max="30" min=0 onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.keyCode === 8;" required>
+                        </div>
+                        <div class="form-group col-md-4 driver-price-div required">
+                            <label for="inputPriceDriver${idval}">Driver Price *</label>
+                            <input type="number" class="form-control allowdecimal" id="inputPriceDriver${idval}" placeholder="Enter Driver Price" maxlength="10" required>
+                        </div>
+                    </div>`
+            $('#payment-div-id').append(ehtml);
+            updatePaymentInputFields();
+        }
+
+        /* <div class="form-group row" id="shift${idval}">
+            <div class="form-group col-md-6">
+                <label for="inputShiftName${idval}">Shift Name *</label>
+                <input type="text" class="form-control" id="inputShiftName${idval}" placeholder="Enter Shift Name" required>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="form-group row">
+                    <div class="form-group col-md-6">
+                        <label for="inputShiftStartTime${idval}">Shift Start Time *</label>
+                        <input id="inputShiftStartTime${idval}" class="form-control flatpickr flatpickr-input active col-md-3" type="text" placeholder="Select Time..">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputShiftEndTime${idval}">Shift End Time *</label>
+                        <span onclick="removethisid('shift${idval}')" class="badge badge-danger float-right" id="delethisidspan"> Delete This</span>
+                        <input id="inputShiftEndTime${idval}" class="form-control flatpickr flatpickr-input active col-md-3" type="text" placeholder="Select Time..">
+                    </div>
+                </div>
+            </div>
+        </div> */
+
+        const addExtraShiftsInForm = () => {
+            const idval = `${shiftCount++}`;
+            ehtml = `<div class="form-group row" id="shift${idval}">
+                        <div class="form-group col-md-6">
+                            <label for="inputShiftName${idval}">Shift Name *</label>
+                            <input type="text" class="form-control" id="inputShiftName${idval}" placeholder="Enter Shift Name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="form-group row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputShiftStartTime${idval}">Shift Start Time *</label>
+                                    <input id="inputShiftStartTime${idval}" class="form-control flatpickr flatpickr-input active col-md-3" type="text" placeholder="Select Time..">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputShiftEndTime${idval}">Shift End Time *</label>
+                                    <span onclick="removeById('shift${idval}')" class="badge badge-danger float-right" id="delethisidspan"> Delete This</span>
+                                    <input id="inputShiftEndTime${idval}" class="form-control flatpickr flatpickr-input active col-md-3" type="text" placeholder="Select Time..">
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+            $('#append-div-id').append(ehtml);
+            setStartEndTimeDropdown(`inputShiftStartTime${idval}`, `inputShiftEndTime${idval}`)
+        }
+
+        function initMap(mapid=1) {
+            const myLatlng_drop = { lat: 21.170240, lng: 72.831062 };
+            const map_address = new google.maps.Map(document.getElementById("map"), {
+                zoom: 11,
+                center: myLatlng_drop ,
+            });
+            // Create the initial InfoWindow.
+            let infoWindow = new google.maps.InfoWindow({
+            content: "Click the map to get latitude / longitude !",
+            position: myLatlng_drop ,
+            });
+            infoWindow.open(map_address);
+            // Configure the click listener.
+            map_address.addListener("click", (mapsMouseEvent) => {
+                // Close the current InfoWindow.
+                infoWindow.close();
+                // Create a new InfoWindow.
+                infoWindow = new google.maps.InfoWindow({
+                    position: mapsMouseEvent.latLng,
+                    
+                });
+                infoWindow.setContent(
+                    addressdata   = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+                );
+                j = JSON.parse(addressdata);
+                $("#inputLatitude1").val(j.lat);
+                $("#inputLongitude1").val(j.lng);
+                infoWindow.open(map_address);
+            });            
+        }
+
+        const checkEmailValidation = (tag) => {
+            const dt = $(tag).val();
+            // const pattern = new RegExp(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/i);
+            const pattern = new RegExp(/^[^@\s]+@[^@\s]+\.[^@\s]+$/i);
+            const isValid = pattern.test(dt);
+            const msgId = $('#emailErrorMsg');
+            !isValid && dt ? msgId.text('Email is not valid') : msgId.empty();
+        }
+
+        const checkNumberValidation = (tag) => {
+            const dt = $(tag).val();
+            // const pattern = new RegExp(/^[6789]\d{9}$/i);
+            const pattern = new RegExp(/^([6789]\d{9}|0\d{10}|91\d{10})$/i);
+            const isValid = pattern.test(dt);
+            const msgId = $('#mobileErrorMsg');
+            !isValid ? msgId.text('Mobile Number is not valid') : msgId.empty();
+        }
+
+        const checkContactPersonNumberValidation = (tag) => {
+            const dt = $(tag).val();
+            // const pattern = new RegExp(/^[6789]\d{9}$/i);
+            const pattern = new RegExp(/^([6789]\d{9}|0\d{10}|91\d{10})$/i);
+            const isValid = pattern.test(dt);
+            const msgId = $('#contactPersonNumberErrorMsg');
+            !isValid && dt ? msgId.text('Contact Person Number is not valid') : msgId.empty();
+        }
+
+        $("#inputPincode1").keyup(() => {
+            const pincode = $(this).val();
+            if(pincode.length == 6) {
+                getPincodedetails(pincode)
+            }
+        });
+
+        const getGSTdetails = (e) => {
+            e.preventDefault();
+
+            const gstNumber = $('#inputGstNumber').val();
+            if(!gstNumber) {
+                alert('Enter a valid GST Number')
+            }
+            
+            $.ajax({
+                url: `/admin/customer/checkGstNumber`,
+                type: "POST",
+                headers: { "Authorization": 'Bearer ' + localStorage.getItem('token') },
+                data: JSON.stringify({gstNumber}),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    // console.log('data > ', data);
+                    setCustomerDataUsingGstNumber(data.data)
+                },
+                error: function (error) {
+                    console.log('Error', error, error.responseJSON);
+                    if (error.responseJSON && error.responseJSON.message || error.responseJSON.msg) {
+                        const errorMsg = error.responseJSON.message || error.responseJSON.msg;
+                        showErrorPopup(errorMsg);
+                    }
+                }
+            });
+        }
+
+        const setCustomerDataUsingGstNumber = (data) => {
+            $('#inputFullname').val(data.fullname);
+            $('#inputOwnership').val(data.ownership);
+            $('#inputBusinessName').val(data.businessName);
+            $('#inputBusinessType').val(data.businessType);
+
+            $('#inputPincode1').val(data.pincode);
+            $('#inputState1').val(data.state);
+            $('#inputCity1').val(data.city);
+            $('#inputAddress1').val(data.address);
+        }
+
+        const getPincodedetails = (pincode) => {          
+            $.ajax({
+                url: `/admin/customer/getPincodeDetails`,
+                type: "POST",
+                headers: { "Authorization": 'Bearer ' + localStorage.getItem('token') },
+                data: JSON.stringify({pincode}),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    // console.log('data > ', data);
+                    setCustomerDataUsingPincode(data.data)
+                },
+                error: function (error) {
+                    console.log('Error', error, error.responseJSON);
+                }
+            });
+        }
+
+        const setCustomerDataUsingPincode = (data) => {
+            // console.log(data)
+            $('#inputPincode1').val(data.pincode);
+            // $('#inputCountry1').val(data.country);
+            $('#inputState1').val(data.state);
+            $('#inputCity1').val(data.city);
+        }
+
+        const addCustomer = (e) => {
+            e.preventDefault();
+
+            if($('#mobileErrorMsg').contents().length || $('#contactPersonNumberErrorMsg').contents().length) {
+                return showErrorPopup("Number is not valid");
+            }
+
+            const { 
+                inputGstNumber,
+                inputFullname,
+                inputOwnership,
+                inputBusinessName,
+                inputBusinessType,
+                inputEmail,
+                inputMobile,
+
+                inputPincode1,
+                inputCountry1,
+                inputState1,
+                inputCity1,
+                inputAddress1,
+                inputDispatchAddress1,
+                inputLandmark1,
+                inputContactPersonName1,
+                inputContactPersonNumber1,
+                inputLatitude1,
+                inputLongitude1,
+            } = e.target.elements;
+
+            const customerDataObj = {
+                gstNumber: inputGstNumber.value,
+                name: inputFullname.value,
+                ownership: inputOwnership.value,
+                businessName: inputBusinessName.value, 
+                businessType: inputBusinessType.value,
+                email: inputEmail.value,
+                mobile: inputMobile.value,
+                paymentType: $('#inputPaymentType').find(":selected").val(),
+
+                addresses: [{
+                    address: inputAddress1.value,
+                    dispatchAddress: inputDispatchAddress1.value,
+                    pincode: inputPincode1.value,
+                    country: inputCountry1.value,
+                    state: inputState1.value,
+                    city: inputCity1.value,
+                    landmark: inputLandmark1.value,
+                    contactPersonName: inputContactPersonName1.value,
+                    contactPersonMobile: inputContactPersonNumber1.value,
+                    latitude: inputLatitude1.value,
+                    longitude: inputLongitude1.value,
+                    isDefault: $('#gridCheck').is(':checked'),
+                }]
+            }
+
+            if(planCount > 0) {
+                const planArr = [];
+                for(let i = 0; i < planCount; i++) {
+                    const planName = $(`#inputPlanName${i}`).val();
+                    const planPriceCustomer = $(`#inputPriceCustomer${i}`).val();
+                    const planDays = $(`#inputDays${i}`).val();
+                    const planPriceDriver = $(`#inputPriceDriver${i}`).val();
+                    if (customerDataObj.paymentType == 1 && planName && planPriceCustomer && planDays) planArr.push({ planName, planPriceCustomer, planDays })
+                    else planArr.push({ planName, planPriceCustomer, planPriceDriver })
+                }
+                if(planArr.length > 0) customerDataObj['plans'] = planArr;
+            }
+
+            if(shiftCount > 0) {
+                const shiftArr = [];
+                for(let i = 0; i < shiftCount; i++) {
+                    const shiftName = $(`#inputShiftName${i}`).val();
+                    const shiftStartTime = $(`#inputShiftStartTime${i}`).val();
+                    const shiftEndTime = $(`#inputShiftEndTime${i}`).val();
+                    // console.log(shiftName, shiftStartTime, shiftEndTime)
+                    if (shiftName && shiftStartTime && shiftEndTime) shiftArr.push({ shiftName, shiftStartTime, shiftEndTime });
+                }
+                if(shiftArr.length > 0) customerDataObj['shifts'] = shiftArr;
+            }
+            // console.log(customerDataObj);
+
+            $.ajax({
+                url: `/admin/customer`,
+                type: "POST",
+                headers: { "Authorization": 'Bearer ' + localStorage.getItem('token') },
+                data: JSON.stringify(customerDataObj),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    // console.log('data > ', data);
+                    showSuccessPopup(data.msg);
+                    setTimeout(() => {
+                        // window.location.href = '/adminside/customer';
+                    }, 500); 
+                },
+                error: function (error) {
+                    console.log('Error', error, error.responseJSON);
+                    if (error.responseJSON && error.responseJSON.message || error.responseJSON.msg) {
+                        const errorMsg = error.responseJSON.message || error.responseJSON.msg;
+
+                        if(errorMsg.includes('Addresses[0].')) {
+                            errorMsg = errorMsg.replace('Addresses[0].', '')
+                        }
+                        showErrorPopup(errorMsg);
+                    }
+                }
+            });
+        }
+
+        const showSuccessPopup = (successMsg) => {
+            if(!successMsg) return;
+            (function() {
+                Snackbar.show({
+                    pos: 'top-right',
+                    text: successMsg,
+                    duration: 3000,
+                    actionTextColor: '#fff',
+                    backgroundColor: '#8dbf42'
+                });
+            })();
+        }
+
+        const showErrorPopup = (errorMsg) => {
+            (function () {
+                Snackbar.show({
+                    pos: 'top-right',
+                    text: errorMsg,
+                    duration: 3000,
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a'
+                });
+            })();
+        }
+
+
+    </script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+</body>
+
+</html>
